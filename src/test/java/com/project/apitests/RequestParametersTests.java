@@ -1,19 +1,15 @@
 package com.project.apitests;
 
-import io.restassured.RestAssured;
-
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
 import io.restassured.response.Response;
-import static org.hamcrest.Matchers.equalTo;
 
-
-public class AviationstackFlightTests {
-    
+public class RequestParametersTests {
     @Test
     void validFlightPagination(){
 
