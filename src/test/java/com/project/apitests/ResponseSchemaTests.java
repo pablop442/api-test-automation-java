@@ -2,14 +2,9 @@ package com.project.apitests;
 
 import io.restassured.RestAssured;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import io.restassured.response.Response;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 

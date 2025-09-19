@@ -1,6 +1,9 @@
 # API Automation Tests
 This project automates API testing using **Java 23**, **JUnit 5**, **Maven**, and **Rest Assured**.  
-The goal is to verify the correct behavior of  [Aviationstack](https://aviationstack.com/) public API.
+The goal is to verify the correct behavior of  [Aviationstack](https://aviationstack.com/) public API by covering the following scenarios:
+- Schema validation: Validate response schema depending on the parameters of the request.
+- Content validation: Validate if response content is correct according to API documentation.
+- Authentication validation: Validate API security and correct API key behavior.
 ## Project Setup
 - **Java:** 23  
 - **Build tool:** Maven  
