@@ -4,20 +4,16 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.project.apitests</groupId>
     <artifactId>api-test-automation</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
-
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <restassured.version>5.4.0</restassured.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -43,8 +39,13 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -66,6 +67,5 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
 

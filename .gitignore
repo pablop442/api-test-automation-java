@@ -1,0 +1,8 @@
+#IDE configs
+.vscode/
+
+#Environment files
+.env
+
+#Test output
+.target/
