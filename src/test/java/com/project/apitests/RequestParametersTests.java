@@ -1,7 +1,5 @@
 package com.project.apitests;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,26 +7,64 @@ import org.junit.jupiter.api.Test;
 
 import io.restassured.response.Response;
 
-public class RequestParametersTests {
+//TODO: parameterized tests for price range, limit, categoryId
+
+public class RequestParametersTests extends BaseApiTest {
     @Test
-    void validFlightPagination(){
+    void validPriceRange() {
 
-        int resultLimit = 90;
+        int minPrice = 60;
+        int maxPrice = 70;
 
-       Response response = given()
-                .queryParam("access_key", Config.API_KEY)
-                .queryParam("limit", resultLimit)
-            .when()
-                .get(Config.BASE_URL + "/flights")
-            .then()
+        Response response = requestSpec
+                .queryParam("price_min", minPrice)
+                .queryParam("price_max", maxPrice)
+                .when()
+                .get("/products")
+                .then()
                 .statusCode(200)
-                .body("pagination.limit", equalTo(resultLimit))
                 .extract().response();
 
-        int paginationCount = response.path("pagination.count");
-        int dataSize = response.path("data.size()");
-
-        assertEquals(dataSize, paginationCount, "Pagination count should be equal to the number of flights in the data array");
-        assertTrue(paginationCount <= resultLimit, "The pagination count should always be less or equal the limit passed in the parameters");
+        response.jsonPath().getList("price").forEach(price -> {
+            assertTrue((Integer) price >= minPrice && (Integer) price <= maxPrice,
+                    "Price " + price + " is out of range");
+        });
     }
+
+    @Test
+    void validPaginationLimit() {
+
+        int limit = 10;
+
+        Response response = requestSpec
+                .queryParam("limit", limit)
+                .when()
+                .get("/products")
+                .then()
+                .statusCode(200)
+                .extract().response();
+
+        int expectedSize = response.jsonPath().getList("id").size();
+        assertEquals(limit, expectedSize);
+    }
+
+    @Test
+    void validCategoryName() {
+
+        int categoryId = 62;
+        String expectedCategoryName = "Shoes";
+
+        Response response = requestSpec
+                .queryParam("categoryId", categoryId)
+                .when()
+                .get("/products")
+                .then()
+                .statusCode(200)
+                .extract().response();
+
+        response.jsonPath().getList("category.name").forEach(name -> {
+            assertEquals(expectedCategoryName, name);
+        });
+    }
+
 }

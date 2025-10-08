@@ -1,6 +1,6 @@
 # API Automation Tests
 This project automates API testing using **Java 23**, **JUnit 5**, **Maven**, and **Rest Assured**.  
-The goal is to verify the correct behavior of  [Aviationstack](https://aviationstack.com/) public API by covering the following scenarios:
+The goal is to verify the correct behavior of  [Fake Store](https://fakeapi.platzi.com) public API by covering the following scenarios:
 - Schema validation: Validate response schema depending on the parameters of the request.
 - Content validation: Validate if response content is correct according to API documentation.
 - Authentication validation: Validate API security and correct API key behavior.
@@ -23,6 +23,6 @@ The goal is to verify the correct behavior of  [Aviationstack](https://aviations
 To access the API (free tier) you will need to sign up and get an API key. The API key should not be hardcoded, instead store it in an .env file:
 ```java
 API_KEY=your_api_key_here
-BASE_URL=https://api.aviationstack.com/v1
+BASE_URL=https://api.escuelajs.co/api/v1
 ```
 The project loads this automatically via `dotenv-java` (see Config.java file).
