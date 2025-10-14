@@ -2,12 +2,17 @@ package com.project.apitests;
 
 import org.junit.jupiter.api.BeforeAll;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class BaseApiTest {
-    protected static String BASE_URL = "https://api.escuelajs.co/api/v1";
+     private static final Dotenv dotenv = Dotenv.load();
+
+    protected static String BASE_URL = dotenv.get("BASE_URL");
+    protected static String USER_EMAIL = dotenv.get("USER_EMAIL");
+    protected static String PASSWORD = dotenv.get("PASSWORD");
     protected static String TOKEN;
     protected static RequestSpecification requestSpec;
 
@@ -20,7 +25,7 @@ public class BaseApiTest {
         Response response = RestAssured
             .given()
                 .contentType("application/json")
-                .body("{\"email\": \"john@mail.com\", \"password\": \"changeme\"}")
+                .body("{\"email\": \"" + USER_EMAIL + "\", \"password\": \"" + PASSWORD + "\"}")
             .when()
                 .post("/auth/login")
             .then()

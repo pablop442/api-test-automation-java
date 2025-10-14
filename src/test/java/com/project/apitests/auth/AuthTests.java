@@ -3,10 +3,10 @@ package com.project.apitests;
 import org.junit.jupiter.api.Test;
 import io.restassured.response.Response;
 
-//TODO: replace magic strings with constants
-
 public class AuthTests extends BaseApiTest {
+    protected static String INVALID_TOKEN = "invalid_token";
 
+    
     @Test
     void retreiveUserProfile() {
         Response response = requestSpec
@@ -15,7 +15,7 @@ public class AuthTests extends BaseApiTest {
                 .then()
                 .statusCode(200)
                 .extract().response();
-        response.jsonPath().getString("email").equals("john@mail.com");
+        response.jsonPath().getString("email").equals(BaseApiTest.USER_EMAIL);
     }
 
     @Test
@@ -23,7 +23,7 @@ public class AuthTests extends BaseApiTest {
         requestSpec
                 .given()
                 .contentType("application/json")
-                .header("Authorization", "Bearer invalid_token")
+                .header("Authorization", "Bearer " + INVALID_TOKEN)
                 .when()
                 .post("/auth/login")
                 .then()
