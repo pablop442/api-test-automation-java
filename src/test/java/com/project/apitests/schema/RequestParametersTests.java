@@ -1,9 +1,11 @@
-package com.project.apitests;
+package com.project.apitests.schema;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import com.project.apitests.BaseApiTest;
 
 import io.restassured.response.Response;
 
@@ -37,6 +39,7 @@ public class RequestParametersTests extends BaseApiTest {
         int limit = 10;
 
         Response response = requestSpec
+                .queryParam("offset", 0)
                 .queryParam("limit", limit)
                 .when()
                 .get("/products")

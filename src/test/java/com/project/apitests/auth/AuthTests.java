@@ -1,12 +1,14 @@
-package com.project.apitests;
+package com.project.apitests.auth;
 
 import org.junit.jupiter.api.Test;
+
+import com.project.apitests.BaseApiTest;
+
 import io.restassured.response.Response;
 
 public class AuthTests extends BaseApiTest {
     protected static String INVALID_TOKEN = "invalid_token";
 
-    
     @Test
     void retreiveUserProfile() {
         Response response = requestSpec
@@ -40,5 +42,5 @@ public class AuthTests extends BaseApiTest {
                 .post("/auth/login")
                 .then()
                 .statusCode(401);
-        }
     }
+}

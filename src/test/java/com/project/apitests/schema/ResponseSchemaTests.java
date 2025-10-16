@@ -2,16 +2,17 @@ package com.project.apitests.schema;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 import io.restassured.response.Response;
 
 import com.project.apitests.BaseApiTest;
-import com.project.utils.FileUtils;
-import org.json.JSONObject;
-
+import com.project.utils.ApiUtils;
 
 public class ResponseSchemaTests extends BaseApiTest {
+
+    //TODO ADD SETUP AND TEARDOWN IF NEEDED
 
     @Test
     void getAllProducts(){
@@ -28,7 +29,7 @@ public class ResponseSchemaTests extends BaseApiTest {
     @Test
     void getSingleProductById(){
 
-        String productId = "239";
+        final int productId = ApiUtils.createNewProduct();
 
         Response response = requestSpec
             .when() 
@@ -37,29 +38,24 @@ public class ResponseSchemaTests extends BaseApiTest {
                 .statusCode(200)
                 .extract().response();
         
-        response.jsonPath().getString("id").equals(productId);
+        response.then()
+            .body("id", equalTo(productId));
+
+        ApiUtils.deleteProduct(productId);
     }
 
-    @Test
-    void createNewProduct(){
-
-        String jsonPath = "src/test/java/com/project/resources/data/newProduct.json";
-        String body = FileUtils.readJsonFile(jsonPath);
-        JSONObject jsonObject = new JSONObject(body);
-
-        //TODO: We need to make first a GET to retrieve valid category ids, then modify the json file
-
-        Response response = requestSpec
-            .body(body)
+    @Test 
+    void getAllUsers(){
+        requestSpec
             .when()
-                .post("/products")
+                .get("/users")
             .then() 
-                .statusCode(201)
-                .extract().response();
-        
-        response.jsonPath().getString("title").equals(jsonObject.get("title"));
-        response.jsonPath().getString("price").equals(jsonObject.get("price"));
-        response.jsonPath().getString("description").equals(jsonObject.get("description"));
-        response.jsonPath().getString("category.id").equals(jsonObject.get("categoryId"));
+                .statusCode(200)
+                .body("id", notNullValue())
+                .body("email", notNullValue())
+                .body("name", notNullValue())
+                .body("password", notNullValue());
     }
+
+    
 }
