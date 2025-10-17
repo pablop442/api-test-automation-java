@@ -10,7 +10,6 @@ import io.restassured.response.Response;
 
 public class ApiUtils extends BaseApiTest {
 
-    //TODO This should return the response body so that I can use it in validCategoryName test
     public static int getCategoryId(){
         Response response = requestSpec
             .when()
@@ -20,6 +19,16 @@ public class ApiUtils extends BaseApiTest {
                 .extract().response();
         List<Integer> categoryIds = response.jsonPath().getList("id");
         return categoryIds.get(0);
+    }
+
+    public static String getCategoryName(int categoryId){
+        Response response = requestSpec
+            .when()
+                .get("/categories/" + categoryId)
+            .then() 
+                .statusCode(200)
+                .extract().response();
+        return response.jsonPath().getString("name");
     }
 
        public static int createNewProduct(){

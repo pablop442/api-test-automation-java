@@ -12,8 +12,6 @@ import com.project.utils.ApiUtils;
 
 public class ResponseSchemaTests extends BaseApiTest {
 
-    //TODO ADD SETUP AND TEARDOWN IF NEEDED
-
     @Test
     void getAllProducts(){
         requestSpec

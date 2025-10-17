@@ -6,19 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.project.apitests.BaseApiTest;
+import com.project.utils.ApiUtils;
 
 import io.restassured.response.Response;
-
-//TODO: parameterized tests for price range, limit, categoryId
+import io.restassured.specification.RequestSpecification;
+import static io.restassured.RestAssured.given;
 
 public class RequestParametersTests extends BaseApiTest {
     @Test
     void validPriceRange() {
+        //Restarting spec to avoid interference from other tests
+        RequestSpecification spec = given().spec(requestSpec);
 
         int minPrice = 60;
         int maxPrice = 70;
 
-        Response response = requestSpec
+        Response response = spec
                 .queryParam("price_min", minPrice)
                 .queryParam("price_max", maxPrice)
                 .when()
@@ -35,10 +38,12 @@ public class RequestParametersTests extends BaseApiTest {
 
     @Test
     void validPaginationLimit() {
+        //Restarting spec to avoid interference from other tests
+        RequestSpecification spec = given().spec(requestSpec);
 
         int limit = 10;
 
-        Response response = requestSpec
+        Response response = spec
                 .queryParam("offset", 0)
                 .queryParam("limit", limit)
                 .when()
@@ -46,18 +51,20 @@ public class RequestParametersTests extends BaseApiTest {
                 .then()
                 .statusCode(200)
                 .extract().response();
-
+     
         int expectedSize = response.jsonPath().getList("id").size();
         assertEquals(limit, expectedSize);
     }
 
     @Test
     void validCategoryName() {
+        //Restarting spec to avoid interference from other tests
+        RequestSpecification spec = given().spec(requestSpec);
 
-        int categoryId = 62;
-        String expectedCategoryName = "Shoes";
+        int categoryId = ApiUtils.getCategoryId();
+        String expectedCategoryName = ApiUtils.getCategoryName(categoryId);
 
-        Response response = requestSpec
+        Response response = spec
                 .queryParam("categoryId", categoryId)
                 .when()
                 .get("/products")
