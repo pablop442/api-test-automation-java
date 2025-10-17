@@ -14,7 +14,7 @@ import com.project.apitests.BaseApiTest;
 
 import io.restassured.response.Response;
 
-public class UpdateProduct extends BaseApiTest {
+public class UpdateProductTests extends BaseApiTest {
 
     private int createdProductId;
     private JSONObject jsonObject;

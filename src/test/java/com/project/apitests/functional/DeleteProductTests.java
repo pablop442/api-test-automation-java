@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import io.restassured.response.Response;
 
-public class DeleteProduct extends BaseApiTest {
+public class DeleteProductTests extends BaseApiTest {
 
     private int createdProductId;
 

@@ -13,7 +13,7 @@ import com.project.utils.DataUtils;
 
 import io.restassured.response.Response;
 
-public class CreateProduct extends BaseApiTest {
+public class CreateProductTests extends BaseApiTest {
 
     private JSONObject jsonObject;
     private int createdProductId;
