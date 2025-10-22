@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.project.apitests.FirstApiTest
+Test set: com.project.apitests.auth.AuthTests
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.120 s -- in com.project.apitests.FirstApiTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.648 s -- in com.project.apitests.auth.AuthTests

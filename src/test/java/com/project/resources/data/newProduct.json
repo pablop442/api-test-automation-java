@@ -1,0 +1,9 @@
+{
+    "title": "Automation Product_1",
+    "price": 10,
+    "description": "This is a product from automation",
+    "categoryId": 1,
+    "images": [
+        "https://placehold.co/600x400"
+    ]
+}
