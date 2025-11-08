@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import com.project.apitests.BaseApiTest;
 
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 
 public class UpdateProductTests extends BaseApiTest {
@@ -39,6 +40,7 @@ public class UpdateProductTests extends BaseApiTest {
         ApiUtils.deleteProduct(createdProductId);
     }
 
+    @Feature("Update Product Functionality")
     @Test
     void updateProduct() {
         Response response = requestSpec

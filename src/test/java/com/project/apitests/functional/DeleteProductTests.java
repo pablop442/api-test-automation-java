@@ -5,6 +5,8 @@ import com.project.utils.ApiUtils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 
 public class DeleteProductTests extends BaseApiTest {
@@ -17,6 +19,7 @@ public class DeleteProductTests extends BaseApiTest {
         System.out.println("Created product with ID: " + createdProductId);
     }
 
+    @Feature("Delete Product Functionality")
     @Test
     void deleteProduct() {
         Response response = requestSpec

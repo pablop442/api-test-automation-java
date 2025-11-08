@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test;
 import com.project.apitests.BaseApiTest;
 import com.project.utils.ApiUtils;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public class RequestParametersTests extends BaseApiTest {
+    @Feature("Request Parameters Validation")
     @Test
     void validPriceRange() {
         //Restarting spec to avoid interference from other tests
@@ -36,6 +39,8 @@ public class RequestParametersTests extends BaseApiTest {
         });
     }
 
+    @Feature("Request Parameters Validation")
+    @Severity(io.qameta.allure.SeverityLevel.CRITICAL)
     @Test
     void validPaginationLimit() {
         //Restarting spec to avoid interference from other tests
@@ -56,6 +61,7 @@ public class RequestParametersTests extends BaseApiTest {
         assertEquals(limit, expectedSize);
     }
 
+    @Feature("Request Parameters Validation")
     @Test
     void validCategoryName() {
         //Restarting spec to avoid interference from other tests
