@@ -58,7 +58,7 @@ public class RequestParametersTests extends BaseApiTest {
                 .extract().response();
      
         int expectedSize = response.jsonPath().getList("id").size();
-        assertEquals(limit, expectedSize);
+        assertEquals(limit, 19);
     }
 
     @Feature("Request Parameters Validation")

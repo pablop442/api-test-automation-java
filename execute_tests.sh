@@ -24,7 +24,7 @@ else
 fi
 
 # 3. Run the tests
-mvn clean test
+mvn -fae clean test
 echo "API tests completed. Results are in $RESULTS_DIR."
 
 # 4. Generate the new report
