@@ -4,6 +4,12 @@ The goal is to verify the correct behavior of  [Fake Store](https://fakeapi.plat
 - Schema validation: Validate response schema depending on the parameters of the request.
 - Content validation: Validate if response content is correct according to API documentation.
 - Authentication validation: Validate API security and correct API key behavior.
+
+## Test Coverage
+- Tests cover basic CRUD operations from the **/products** endpoints.
+- Tests validate the correctness of the content and format of the response body.
+- Test Data is generated dynamically from Faker library to ensure more coverage.
+
 ## Project Setup
 - **Java:** 23  
 - **Build tool:** Maven  
@@ -19,10 +25,21 @@ The goal is to verify the correct behavior of  [Fake Store](https://fakeapi.plat
 `mvn install`
 - Run tests.
 `mvn test`
-#### API Key
-To access the API (free tier) you will need to sign up and get an API key. The API key should not be hardcoded, instead store it in an .env file:
+
+## Test Reports
+Easily generate user friendly Test Reports thanks to the integration with **Allure Reports**
+- Run Tests and generate the report.  
+`./execute_tests.sh`
+- Historic executions are saved in 'allure-results' folder.
+- Report is automatically open after each execution.
+
+#### Credentials
+To access the API you will need the generic user name and password.
 ```java
-API_KEY=your_api_key_here
-BASE_URL=https://api.escuelajs.co/api/v1
+USER_EMAIL=john@mail.com
+PASSWORD=changeme 
 ```
 The project loads this automatically via `dotenv-java` (see Config.java file).
+
+### About Platzi Fake Store API
+For more information and documentation regarding the test API, visit: [Fake Store](https://fakeapi.platzi.com)
