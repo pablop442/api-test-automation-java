@@ -5,10 +5,32 @@ The goal is to verify the correct behavior of  [Fake Store](https://fakeapi.plat
 - Content validation: Validate if response content is correct according to API documentation.
 - Authentication validation: Validate API security and correct API key behavior.
 
-## 📊 Test Coverage
-- Tests cover basic CRUD operations from the **/products** endpoints.
-- Tests validate the correctness of the content and format of the response body.
-- Test Data is generated dynamically from Faker library to ensure more coverage.
+## 📊 CRUD Operations in the Project
+- CRUD is a simple way to describe the four basic things you can do with information in the API: Create, Read, Update, and Delete. 
+- Tests in this project focus on these four actions for **/products** endpoints.
+- Tests make sure the API behaves correctly every time one of these actions is performed.
+- This includes verifying the returnde prodcut information, the structure of the response, and the status codes.
+
+## 🧩 Endpoints coverage
+
+#### Create Product
+Adding new product to the Fake Store. Verifies:
+- The product was successfully created.
+- The response contains the same information that was sent.
+- The API returns the correct status code (201).
+
+#### Update Product
+Modifies existing product. Verifies:
+- The API accepts the update.
+- The returned product reflects correct new values.
+- The correct status is returned (200).
+
+#### Delete Product
+Removes the product from the system. Verifies:
+- The product is no longer available.
+- The API responds with correct confirmation.
+- The API returns the correct status code (200).
+
 
 ## 🛠️ Project Setup
 - **Java:** 23  
