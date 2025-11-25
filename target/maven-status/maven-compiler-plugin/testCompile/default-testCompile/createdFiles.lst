@@ -1,0 +1,10 @@
+com/project/utils/DataUtils.class
+com/project/apitests/schema/ResponseSchemaTests.class
+com/project/apitests/functional/DeleteProductTests.class
+com/project/utils/ApiUtils.class
+com/project/apitests/schema/RequestParametersTests.class
+com/project/apitests/BaseApiTest.class
+com/project/apitests/auth/AuthTests.class
+com/project/utils/FileUtils.class
+com/project/apitests/functional/UpdateProductTests.class
+com/project/apitests/functional/CreateProductTests.class

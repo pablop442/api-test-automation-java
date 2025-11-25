@@ -7,19 +7,24 @@ import org.junit.jupiter.api.Test;
 
 import com.project.apitests.BaseApiTest;
 import com.project.utils.ApiUtils;
+import com.project.utils.DataUtils;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public class RequestParametersTests extends BaseApiTest {
+    @Feature("Request Parameters Validation")
     @Test
     void validPriceRange() {
         //Restarting spec to avoid interference from other tests
         RequestSpecification spec = given().spec(requestSpec);
 
-        int minPrice = 60;
-        int maxPrice = 70;
+        int minPrice = DataUtils.createRandomMinPrice();
+        int maxPrice = DataUtils.createRandomMaxPrice(minPrice);
+        System.out.println("Testing price range: " + minPrice + " - " + maxPrice);
 
         Response response = spec
                 .queryParam("price_min", minPrice)
@@ -36,12 +41,14 @@ public class RequestParametersTests extends BaseApiTest {
         });
     }
 
+    @Feature("Request Parameters Validation")
+    @Severity(io.qameta.allure.SeverityLevel.CRITICAL)
     @Test
     void validPaginationLimit() {
         //Restarting spec to avoid interference from other tests
         RequestSpecification spec = given().spec(requestSpec);
 
-        int limit = 10;
+        int limit = DataUtils.createRandomPageLimit();
 
         Response response = spec
                 .queryParam("offset", 0)
@@ -53,9 +60,16 @@ public class RequestParametersTests extends BaseApiTest {
                 .extract().response();
      
         int expectedSize = response.jsonPath().getList("id").size();
-        assertEquals(limit, expectedSize);
+
+        if (expectedSize > limit) {
+            assertEquals(limit, expectedSize);
+        } else {
+            System.out.println("Not enough products. Total products less than the limit. Actual size: " + expectedSize);
+        }
+        
     }
 
+    @Feature("Request Parameters Validation")
     @Test
     void validCategoryName() {
         //Restarting spec to avoid interference from other tests

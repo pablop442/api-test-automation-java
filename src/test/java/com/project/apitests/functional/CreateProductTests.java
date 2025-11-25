@@ -11,6 +11,7 @@ import com.project.utils.FileUtils;
 import com.project.utils.ApiUtils;
 import com.project.utils.DataUtils;
 
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 
 public class CreateProductTests extends BaseApiTest {
@@ -40,6 +41,8 @@ public class CreateProductTests extends BaseApiTest {
         ApiUtils.deleteProduct(createdProductId);
     }
 
+    
+    @Feature("Create Product Functionality")
     @Test
     void createNewProduct() {
 

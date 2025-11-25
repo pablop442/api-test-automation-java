@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 
 import com.project.apitests.BaseApiTest;
@@ -12,6 +13,7 @@ import com.project.utils.ApiUtils;
 
 public class ResponseSchemaTests extends BaseApiTest {
 
+    @Feature("Response Schema Validation")
     @Test
     void getAllProducts(){
         requestSpec
@@ -24,6 +26,7 @@ public class ResponseSchemaTests extends BaseApiTest {
                 .body("price", notNullValue());
     }
 
+    @Feature("Response Schema Validation")
     @Test
     void getSingleProductById(){
 
@@ -42,6 +45,7 @@ public class ResponseSchemaTests extends BaseApiTest {
         ApiUtils.deleteProduct(productId);
     }
 
+    @Feature("Response Schema Validation")
     @Test 
     void getAllUsers(){
         requestSpec
