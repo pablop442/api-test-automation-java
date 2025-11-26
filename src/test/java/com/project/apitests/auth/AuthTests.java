@@ -3,6 +3,7 @@ package com.project.apitests.auth;
 import org.junit.jupiter.api.Test;
 
 import com.project.apitests.BaseApiTest;
+import com.project.resources.endpoints.ApiEndpoints;
 
 import io.qameta.allure.Feature;
 import io.restassured.response.Response;
@@ -15,7 +16,7 @@ public class AuthTests extends BaseApiTest {
     void retreiveUserProfile() {
         Response response = requestSpec
                 .when()
-                .get("/auth/profile")
+                .get(ApiEndpoints.PROFILE)
                 .then()
                 .statusCode(200)
                 .extract().response();
@@ -30,7 +31,7 @@ public class AuthTests extends BaseApiTest {
                 .contentType("application/json")
                 .header("Authorization", "Bearer " + INVALID_TOKEN)
                 .when()
-                .post("/auth/login")
+                .post(ApiEndpoints.LOGIN)
                 .then()
                 .statusCode(401);
     }
@@ -43,7 +44,7 @@ public class AuthTests extends BaseApiTest {
                 .contentType("application/json")
                 .header("Authorization", "Bearer ")
                 .when()
-                .post("/auth/login")
+                .post(ApiEndpoints.LOGIN)
                 .then()
                 .statusCode(401);
     }

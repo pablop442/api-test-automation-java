@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.project.apitests.BaseApiTest;
 import com.project.utils.ApiUtils;
 import com.project.utils.DataUtils;
+import com.project.resources.endpoints.ApiEndpoints;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -30,7 +31,7 @@ public class RequestParametersTests extends BaseApiTest {
                 .queryParam("price_min", minPrice)
                 .queryParam("price_max", maxPrice)
                 .when()
-                .get("/products")
+                .get(ApiEndpoints.PRODUCTS)
                 .then()
                 .statusCode(200)
                 .extract().response();
@@ -54,7 +55,7 @@ public class RequestParametersTests extends BaseApiTest {
                 .queryParam("offset", 0)
                 .queryParam("limit", limit)
                 .when()
-                .get("/products")
+                .get(ApiEndpoints.PRODUCTS)
                 .then()
                 .statusCode(200)
                 .extract().response();
@@ -81,7 +82,7 @@ public class RequestParametersTests extends BaseApiTest {
         Response response = spec
                 .queryParam("categoryId", categoryId)
                 .when()
-                .get("/products")
+                .get(ApiEndpoints.PRODUCTS)
                 .then()
                 .statusCode(200)
                 .extract().response();

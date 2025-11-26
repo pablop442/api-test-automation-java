@@ -10,6 +10,8 @@ import io.restassured.response.Response;
 
 import com.project.apitests.BaseApiTest;
 import com.project.utils.ApiUtils;
+import com.project.resources.endpoints.ApiEndpoints;
+
 
 public class ResponseSchemaTests extends BaseApiTest {
 
@@ -18,7 +20,7 @@ public class ResponseSchemaTests extends BaseApiTest {
     void getAllProducts(){
         requestSpec
             .when()
-                .get("/products")
+                .get(ApiEndpoints.PRODUCTS)
             .then() 
                 .statusCode(200)
                 .body("id", notNullValue())
@@ -34,7 +36,7 @@ public class ResponseSchemaTests extends BaseApiTest {
 
         Response response = requestSpec
             .when() 
-                .get("products/" + productId)
+                .get(ApiEndpoints.PRODUCTS + "/" + productId)
             .then() 
                 .statusCode(200)
                 .extract().response();
@@ -50,7 +52,7 @@ public class ResponseSchemaTests extends BaseApiTest {
     void getAllUsers(){
         requestSpec
             .when()
-                .get("/users")
+                .get(ApiEndpoints.USERS)
             .then() 
                 .statusCode(200)
                 .body("id", notNullValue())

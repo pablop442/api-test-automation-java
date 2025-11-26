@@ -2,6 +2,7 @@ package com.project.apitests.functional;
 
 import com.project.apitests.BaseApiTest;
 import com.project.utils.ApiUtils;
+import com.project.resources.endpoints.ApiEndpoints;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class DeleteProductTests extends BaseApiTest {
     void deleteProduct() {
         Response response = requestSpec
                 .when()
-                .delete("products/" + createdProductId)
+                .delete(ApiEndpoints.PRODUCTS + "/" + createdProductId)
                 .then()
                 .statusCode(200)
                 .extract().response();

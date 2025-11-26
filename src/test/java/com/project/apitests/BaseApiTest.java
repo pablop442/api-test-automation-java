@@ -1,5 +1,6 @@
 package com.project.apitests;
 
+import com.project.resources.endpoints.ApiEndpoints;
 import org.junit.jupiter.api.BeforeAll;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -32,7 +33,7 @@ public class BaseApiTest {
                 .contentType("application/json")
                 .body("{\"email\": \"" + USER_EMAIL + "\", \"password\": \"" + PASSWORD + "\"}")
                 .when()
-                .post("/auth/login")
+                .post(ApiEndpoints.LOGIN)
                 .then()
                 .statusCode(201)
                 .extract().response();

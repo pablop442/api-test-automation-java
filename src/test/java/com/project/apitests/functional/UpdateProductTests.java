@@ -3,6 +3,7 @@ package com.project.apitests.functional;
 import com.project.utils.ApiUtils;
 import com.project.utils.DataUtils;
 import com.project.utils.FileUtils;
+import com.project.resources.endpoints.ApiEndpoints;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
@@ -46,7 +47,7 @@ public class UpdateProductTests extends BaseApiTest {
         Response response = requestSpec
                 .body(jsonObject.toString())
                 .when()
-                .put("products/" + createdProductId)
+                .put(ApiEndpoints.PRODUCTS + "/" + createdProductId)
                 .then()
                 .statusCode(200)
                 .extract().response();

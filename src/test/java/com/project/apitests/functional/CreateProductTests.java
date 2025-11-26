@@ -10,6 +10,7 @@ import com.project.apitests.BaseApiTest;
 import com.project.utils.FileUtils;
 import com.project.utils.ApiUtils;
 import com.project.utils.DataUtils;
+import com.project.resources.endpoints.ApiEndpoints;
 
 import io.qameta.allure.Feature;
 import io.restassured.response.Response;
@@ -49,7 +50,7 @@ public class CreateProductTests extends BaseApiTest {
         Response response = requestSpec
                 .body(jsonObject.toString())
                 .when()
-                .post("/products")
+                .post(ApiEndpoints.PRODUCTS)
                 .then()
                 .statusCode(201)
                 .extract().response();
