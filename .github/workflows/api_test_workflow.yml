@@ -2,7 +2,7 @@ name: API Test Automation
 on: 
     push:
         branches:
-        - develop
+        - main
     pull_request:
         branches:
         - main
@@ -41,7 +41,7 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
             name: allure-results
-            path: target/allure-results # Maven default output directory for Allure results
+            path: allure-results 
             retention-days: 3
 
     build-and-deploy-report:
@@ -58,7 +58,7 @@ jobs:
 
         - name: Generate Allure Report
           id: allure_report
-          uses: simple-elf/allure-report-action@v1.8.0
+          uses: simple-elf/allure-report-action@v1.7
           if: always()
           with:
             allure_results: allure-results
