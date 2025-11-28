@@ -1,6 +1,7 @@
 package com.project.apitests.schema;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -17,6 +18,8 @@ public class ResponseSchemaTests extends BaseApiTest {
 
     @Feature("Response Schema Validation")
     @Test
+    @Tag("Regression")
+    @Tag("Smoke")
     void getAllProducts(){
         requestSpec
             .when()
@@ -30,6 +33,7 @@ public class ResponseSchemaTests extends BaseApiTest {
 
     @Feature("Response Schema Validation")
     @Test
+    @Tag("Regression")
     void getSingleProductById(){
 
         final int productId = ApiUtils.createNewProduct();
@@ -48,7 +52,9 @@ public class ResponseSchemaTests extends BaseApiTest {
     }
 
     @Feature("Response Schema Validation")
-    @Test 
+    @Test
+    @Tag("Regression")
+    @Tag("Sanity")
     void getAllUsers(){
         requestSpec
             .when()

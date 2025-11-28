@@ -4,6 +4,7 @@
 /Users/pablo.pena/Documents/Code/java-api-automation/api-test-automation/src/test/java/com/project/apitests/functional/CreateProductTests.java
 /Users/pablo.pena/Documents/Code/java-api-automation/api-test-automation/src/test/java/com/project/apitests/schema/ResponseSchemaTests.java
 /Users/pablo.pena/Documents/Code/java-api-automation/api-test-automation/src/test/java/com/project/utils/DataUtils.java
+/Users/pablo.pena/Documents/Code/java-api-automation/api-test-automation/src/test/java/com/project/resources/endpoints/ApiEndpoints.java
 /Users/pablo.pena/Documents/Code/java-api-automation/api-test-automation/src/test/java/com/project/apitests/functional/UpdateProductTests.java
 /Users/pablo.pena/Documents/Code/java-api-automation/api-test-automation/src/test/java/com/project/utils/ApiUtils.java
 /Users/pablo.pena/Documents/Code/java-api-automation/api-test-automation/src/test/java/com/project/apitests/auth/AuthTests.java

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
 
 import com.project.apitests.BaseApiTest;
 import com.project.utils.ApiUtils;
@@ -19,6 +20,7 @@ import static io.restassured.RestAssured.given;
 public class RequestParametersTests extends BaseApiTest {
     @Feature("Request Parameters Validation")
     @Test
+    @Tag("Regression")
     void validPriceRange() {
         //Restarting spec to avoid interference from other tests
         RequestSpecification spec = given().spec(requestSpec);
@@ -45,6 +47,7 @@ public class RequestParametersTests extends BaseApiTest {
     @Feature("Request Parameters Validation")
     @Severity(io.qameta.allure.SeverityLevel.CRITICAL)
     @Test
+    @Tag("Regression")
     void validPaginationLimit() {
         //Restarting spec to avoid interference from other tests
         RequestSpecification spec = given().spec(requestSpec);
@@ -72,6 +75,8 @@ public class RequestParametersTests extends BaseApiTest {
 
     @Feature("Request Parameters Validation")
     @Test
+    @Tag("Regression")
+    @Tag("Sanity")
     void validCategoryName() {
         //Restarting spec to avoid interference from other tests
         RequestSpecification spec = given().spec(requestSpec);

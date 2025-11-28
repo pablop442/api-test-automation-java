@@ -3,6 +3,7 @@ package com.project.apitests.functional;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -45,6 +46,9 @@ public class CreateProductTests extends BaseApiTest {
     
     @Feature("Create Product Functionality")
     @Test
+    @Tag("Regression")
+    @Tag("Sanity")
+    @Tag("Smoke")
     void createNewProduct() {
 
         Response response = requestSpec

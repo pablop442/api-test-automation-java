@@ -2,6 +2,7 @@ com/project/utils/DataUtils.class
 com/project/apitests/schema/ResponseSchemaTests.class
 com/project/apitests/functional/DeleteProductTests.class
 com/project/utils/ApiUtils.class
+com/project/resources/endpoints/ApiEndpoints.class
 com/project/apitests/schema/RequestParametersTests.class
 com/project/apitests/BaseApiTest.class
 com/project/apitests/auth/AuthTests.class

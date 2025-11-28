@@ -1,6 +1,7 @@
 package com.project.apitests.auth;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
 
 import com.project.apitests.BaseApiTest;
 import com.project.resources.endpoints.ApiEndpoints;
@@ -13,6 +14,8 @@ public class AuthTests extends BaseApiTest {
 
     @Feature("Authentication Tests")
     @Test
+    @Tag("Regression")
+    @Tag("Smoke")
     void retreiveUserProfile() {
         Response response = requestSpec
                 .when()
@@ -24,6 +27,7 @@ public class AuthTests extends BaseApiTest {
     }
 
     @Feature("Authentication Tests")
+    @Tag("Regression")
     @Test
     void invalidLogin() {
         requestSpec
@@ -37,6 +41,7 @@ public class AuthTests extends BaseApiTest {
     }
 
     @Feature("Authentication Tests")
+    @Tag("Regression")
     @Test
     void missingLoginCredentials() {
         requestSpec

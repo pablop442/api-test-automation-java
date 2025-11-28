@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.project.apitests.functional.UpdateProductTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.680 s -- in com.project.apitests.functional.UpdateProductTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.417 s -- in com.project.apitests.functional.UpdateProductTests

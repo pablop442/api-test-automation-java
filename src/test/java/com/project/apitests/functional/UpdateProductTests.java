@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.project.apitests.BaseApiTest;
@@ -43,6 +44,7 @@ public class UpdateProductTests extends BaseApiTest {
 
     @Feature("Update Product Functionality")
     @Test
+    @Tag("Regression")
     void updateProduct() {
         Response response = requestSpec
                 .body(jsonObject.toString())
