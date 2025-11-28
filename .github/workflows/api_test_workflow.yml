@@ -1,0 +1,72 @@
+name: API Test Automation
+on: 
+    push:
+        branches:
+        - develop
+    pull_request:
+        branches:
+        - main
+    workflow_dispatch:
+        inputs:
+            test_profile:
+                description: 'Maven profile to run (e.g. smoke-tests, regression-tests, sanity-tests)'
+                required: true
+                default: 'all-tests'
+jobs:
+    run-api-tests:
+        name: Run API Tests
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
+        - name: Set up JDK 23
+          uses: actions/setup-java@v3
+          with:
+            java-version: '23'
+            distribution: 'temurin'
+            cache: 'maven'
+
+        - name: Set up Maven
+          uses: s4u/setup-maven-action@v1.9.0
+          with:
+            java-version: '23'
+        
+        - name: Run API Tests with Maven
+          run: |
+                echo "Running tests with profile: ${{ github.event.inputs.test_profile || 'all-tests' }}"
+                mvn clean test -P${{ github.event.inputs.test_profile || 'all-tests' }}
+        
+        - name: ⬆️ Upload Allure Results
+          uses: actions/upload-artifact@v4
+          with:
+            name: allure-results
+            path: target/allure-results # Maven default output directory for Allure results
+            retention-days: 3
+
+    build-and-deploy-report:
+        needs: run-api-tests
+        runs-on: ubuntu-latest
+        if: success() || failure() 
+
+        steps:
+        - name: Download Allure Results
+          uses: actions/download-artifact@v4
+          with:
+            name: allure-results
+            path: allure-results
+
+        - name: Generate Allure Report
+          id: allure_report
+          uses: simple-elf/allure-report-action@v1.8.0
+          if: always()
+          with:
+            allure_results: allure-results
+            report_path: report
+        
+        - name: Deploy Report to GitHub Pages
+          uses: peaceiris/actions-gh-pages@v3
+          if: always()
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: report
