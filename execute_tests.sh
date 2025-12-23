@@ -3,7 +3,9 @@ set -e
 
 #Profile checking
 if [ -z "$1" ]; then
-    echo "Executing: $0 <profile_name>..."
+    echo "Error: Profile name missing."
+    echo "Available profiles: smoke-tests, sanity-tests, regression-tests, all-tests"
+    echo "Usage: $0 <profile_id>"
     exit 1
 fi
 
@@ -17,7 +19,7 @@ echo "Running tests with profile: $PROFILE_NAME"
 rm -rf "$RESULTS_DIR"
 mkdir -p "$RESULTS_DIR"
 
-mvn clean test -P"$PROFILE_NAME" -Dallure.results.directory="$RESULTS_DIR"
+mvn clean test -P="$PROFILE_NAME" -Dallure.results.directory="$RESULTS_DIR"
 
 allure generate "$RESULTS_DIR" -o "$REPORT_DIR" --clean
 

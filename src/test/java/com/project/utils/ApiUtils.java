@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import com.project.apitests.BaseApiTest;
+import com.project.testrunner.BaseApiTest;
 
 import io.restassured.response.Response;
 

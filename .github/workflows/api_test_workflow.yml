@@ -38,7 +38,7 @@ jobs:
                 echo "Running tests with profile: ${{ github.event.inputs.test_profile || 'all-tests' }}"
                 mvn clean test -P${{ github.event.inputs.test_profile || 'all-tests' }}
         
-        - name: ⬆️ Upload Allure Results
+        - name: Upload Allure Results
           uses: actions/upload-artifact@v4
           with:
             name: allure-results

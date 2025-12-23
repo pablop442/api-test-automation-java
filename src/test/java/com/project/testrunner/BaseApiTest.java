@@ -1,11 +1,10 @@
-package com.project.apitests;
+package com.project.testrunner;
 
 import com.project.resources.endpoints.ApiEndpoints;
 import org.junit.jupiter.api.BeforeAll;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import io.restassured.RestAssured;
-import io.restassured.config.LogConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -20,9 +19,6 @@ public class BaseApiTest {
 
     @BeforeAll
     static void setup() {
-        // Configure RestAssured Logging
-        RestAssured.config = RestAssured.config()
-                .logConfig(LogConfig.logConfig().enableLoggingOfRequestAndResponseIfValidationFails());
                 
         RestAssured.baseURI = BASE_URL;
         RestAssured.useRelaxedHTTPSValidation();
