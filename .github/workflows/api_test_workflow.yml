@@ -13,6 +13,8 @@ on:
                 description: 'Maven profile to run (e.g. smoke-tests, regression-tests, sanity-tests)'
                 required: true
                 default: 'all-tests'
+permissions:
+    contents: write
 jobs:
     run-api-tests:
         name: Run API Tests
@@ -40,17 +42,21 @@ jobs:
         
         - name: Upload Allure Results
           uses: actions/upload-artifact@v4
+          if: always()
           with:
             name: allure-results
             path: allure-results 
-            retention-days: 3
+            retention-days: 1
 
     build-and-deploy-report:
         needs: run-api-tests
         runs-on: ubuntu-latest
-        if: success() || failure() 
+        if: always()
 
         steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
         - name: Download Allure Results
           uses: actions/download-artifact@v4
           with:
@@ -63,11 +69,13 @@ jobs:
           if: always()
           with:
             allure_results: allure-results
-            report_path: report
+            report_path: allure-report
+            gh_pages: gh-pages
+            allure_history: allure-history
         
         - name: Deploy Report to GitHub Pages
           uses: peaceiris/actions-gh-pages@v3
           if: always()
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: report
+            publish_dir: allure-report
