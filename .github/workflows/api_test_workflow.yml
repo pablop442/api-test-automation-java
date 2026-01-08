@@ -1,0 +1,84 @@
+name: API Test Automation
+on: 
+    push:
+        branches:
+        - develop
+        - main
+    pull_request:
+        branches:
+        - main
+    workflow_dispatch:
+        inputs:
+            test_profile:
+                description: 'Maven profile to run (e.g. smoke-tests, regression-tests, sanity-tests)'
+                required: true
+                default: 'all-tests'
+permissions:
+    contents: write
+jobs:
+    run-api-tests:
+        name: Run API Tests
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
+        - name: Set up JDK 23
+          uses: actions/setup-java@v3
+          with:
+            java-version: '23'
+            distribution: 'temurin'
+            cache: 'maven'
+
+        - name: Set up Maven
+          uses: s4u/setup-maven-action@v1.9.0
+          with:
+            java-version: '23'
+        
+        - name: Run API Tests with Maven
+          run: |
+                echo "Running tests with profile: ${{ github.event.inputs.test_profile || 'all-tests' }}"
+                mvn clean test -P${{ github.event.inputs.test_profile || 'all-tests' }}
+        
+        - name: Upload Allure Results
+          uses: actions/upload-artifact@v4
+          if: always()
+          with:
+            name: allure-results
+            path: allure-results 
+            retention-days: 1
+
+    build-and-deploy-report:
+        needs: run-api-tests
+        runs-on: ubuntu-latest
+        if: always()
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
+        - name: Download Allure Results
+          uses: actions/download-artifact@v4
+          with:
+            name: allure-results
+            path: allure-results
+
+        - name: Set up Allure
+          run: |
+            wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz
+            tar -zxvf allure-2.29.0.tgz
+            sudo mv allure-2.29.0 /opt/allure
+            sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+
+        - name: Generate Allure Report
+          run: |
+            # Include history to see trends over time
+            allure generate allure-results --clean -o allure-report
+        
+        - name: Deploy Report to GitHub Pages
+          uses: peaceiris/actions-gh-pages@v3
+          if: always()
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: allure-report
+            publish_branch: gh-pages

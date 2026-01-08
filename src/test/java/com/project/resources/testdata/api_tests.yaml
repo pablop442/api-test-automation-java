@@ -1,0 +1,105 @@
+testCases:
+
+#### User Authentication Tests ####
+
+  - name: "Retrieve User Profile"
+    endpointKey: "profile"
+    httpMethod: "GET"
+    expectedStatusCode: 200
+    tag: ["Regression", "Smoke", "Sanity"]
+    responseValidations:
+    - field: "email"
+      expected: "john@mail.com"
+
+  - name: "Invalid Login - Unauthorized Token"
+    endpointKey: "login"
+    httpMethod: "POST"
+    tag: ["Regression"]
+    expectedStatusCode: 401
+    headers:
+      Authorization: "Bearer very_fake_token"
+
+  - name: "Invalid Login - No Token"
+    endpointKey: "login"
+    httpMethod: "POST"
+    tag: ["Regression"]
+    expectedStatusCode: 401
+    headers:
+      Authorization: ""
+
+
+#### Functional Tests ####
+
+  - name: "Create Product Test"
+    endpointKey: "products"
+    httpMethod: "POST"
+    expectedStatusCode: 201
+    requestBodyFile: "newProduct.json"
+    tag: ["Regression", "Smoke", "Sanity"]
+    responseValidations:
+    - field: "price"
+      expected: 10
+    - field: "description"
+      expected: "This is a product from automation"
+    bodyUpdates:
+      categoryId: "dynamic_id"
+      title: "dynamic_product_name"
+
+  - name: "Delete Product Test"
+    endpointKey: "productDetail"
+    httpMethod: "DELETE"
+    precondition: "createProduct"
+    expectedStatusCode: 200
+    tag: ["Regression", "Smoke"]
+    pathParams:
+      productId: 0
+
+  - name: "Update Product Test"
+    endpointKey: "productDetail"
+    httpMethod: "PUT"
+    precondition: "createProduct"
+    expectedStatusCode: 200
+    requestBodyFile: "updateProduct.json"
+    tag: ["Regression", "Sanity"]
+    pathParams:
+      productId: 0
+
+
+#### Schema Validation Tests ####
+
+  - name: "Request Parameters Validation - Valid Price Range" 
+    endpointKey: "products"
+    httpMethod: "GET"
+    tag: ["Regression", "Sanity"]
+    expectedStatusCode: 200
+    queryParams:
+      price_min: 10
+      price_max: 50
+    responseValidations:
+      - field: "price.min()" 
+        operator: "greaterThanOrEqualTo"
+        expected: 10
+      - field: "price.max()"
+        operator: "lessThanOrEqualTo"
+        expected: 50
+
+  - name: "Request Parameters Validation - Valid Pagination Limit" 
+    endpointKey: "products"
+    httpMethod: "GET"
+    tag: ["Regression", "Smoke"]
+    expectedStatusCode: 200
+    queryParams:
+      offset: 0
+      limit: 3
+    responseValidations:
+      - field: "size()" 
+        operator: "lessThanOrEqualTo"
+        expected: 3
+
+
+
+
+    
+
+    
+
