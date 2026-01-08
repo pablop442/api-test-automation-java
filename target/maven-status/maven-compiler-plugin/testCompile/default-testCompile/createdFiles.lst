@@ -6,7 +6,7 @@ com/project/testrunner/DataDrivenTest.class
 com/project/utils/ApiUtils.class
 com/project/datamodel/Validation.class
 com/project/resources/endpoints/ApiEndpoints.class
-com/project/apitests/BaseApiTest.class
 com/project/datamodel/TestSuite.class
+com/project/testrunner/BaseApiTest.class
 com/project/utils/FileUtils.class
 com/project/datamodel/TestCase.class
